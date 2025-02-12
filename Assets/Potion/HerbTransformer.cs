@@ -5,7 +5,11 @@ using UnityEngine;
 public class HerbTransformer : MonoBehaviour
 {
     // TODO: inject repository
-    private Dictionary<string, int> herbRepository;
+    private Dictionary<string, int> herbRepository = new Dictionary<string, int>()
+    {
+        { "301", 10 },
+        { "401", 10 },
+    };
 
     // ratio 9 => 2
     // note: count 表示要轉換幾份，i.e. 傳入 1 會轉出 2 個藥材

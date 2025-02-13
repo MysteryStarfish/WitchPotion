@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UpdateButtonViewRequest;
 using VContainer;
 
 public class NodeChangeButton : MonoBehaviour
 {
     [Inject] private NodeChangePublisher _publisher;
     [Inject] private NodeChangeSubscriber _subscriber;
+    [Inject] private UpdateButtonViewSubscriber _vewSubscriber;
 
     [SerializeField] private Button button;
     [SerializeField] private int chosenIndex;
@@ -14,7 +16,7 @@ public class NodeChangeButton : MonoBehaviour
     {
         button.onClick.AddListener(() =>
         {
-            Debug.Log($"Button clicked, requesting scene change to {chosenIndex}");
+            // Debug.Log($"Button clicked, requesting scene change to {chosenIndex}");
             _publisher.RequestSceneChange(chosenIndex);
         });
     }

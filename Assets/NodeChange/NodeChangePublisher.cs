@@ -1,5 +1,4 @@
 using MessagePipe;
-using UnityEngine;
 
 public class NodeChangePublisher
 {
@@ -8,12 +7,12 @@ public class NodeChangePublisher
     public NodeChangePublisher(IPublisher<NodeChangeRequest> publisher)
     {
         _publisher = publisher;
-        Debug.Log($"NodeChangePublisher subscribed successfully.");
+        // Debug.Log($"NodeChangePublisher subscribed successfully.");
     }
 
     public void RequestSceneChange(int chosenIndex)
     {
-        Debug.Log($"Publishing scene change request: {chosenIndex}");
+        // Debug.Log($"Publishing scene change request: {chosenIndex}");
         _publisher.Publish(new NodeChangeRequest(chosenIndex));
     }
 }

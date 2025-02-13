@@ -4,6 +4,7 @@ using UnityEngine;
 public class CraftPotion : MonoBehaviour
 {
     // TODO: inject 
+    [SerializeField]
     private List<PotionFormula> potionFormulas;
 
     public Potion Craft(Dictionary<string, int> herbs)
@@ -48,6 +49,8 @@ public class CraftPotion : MonoBehaviour
     // TODO: impl
     private Potion findPotion(string potionName)
     {
-        return null;
+        var tmp = new Potion();
+        tmp.name = potionName;
+        return tmp;
     }
 }

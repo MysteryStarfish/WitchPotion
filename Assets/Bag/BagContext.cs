@@ -7,6 +7,8 @@ namespace WitchPotion.Bag
     {
         public HerbBag HerbBag { get; private set; }
         public PotionBag PotionBag { get; private set; }
+        public HerbBag PlayerHerbBag { get; private set; }
+        public PotionBag PlayerPotionBag { get; private set; }
 
         public BagContext(
             HerbRepository herbRepository,
@@ -15,6 +17,8 @@ namespace WitchPotion.Bag
         {
             this.HerbBag = new HerbBag(herbRepository);
             this.PotionBag = new PotionBag(potionRepository);
+            this.PlayerHerbBag = new HerbBag(herbRepository);
+            this.PlayerPotionBag = new PotionBag(potionRepository);
         }
     }
 }

@@ -13,6 +13,7 @@ public class GameLifetimeScope : LifetimeScope
     [SerializeField] private MapViewer view;
     [SerializeField] private List<Herb> herbs;
     [SerializeField] private List<Potion> potions;
+    [SerializeField] private List<PotionFormula> potionFormulas;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -27,8 +28,8 @@ public class GameLifetimeScope : LifetimeScope
         MapController.Instance.GenerateMap();
         builder.Register<NodeChangeSubscriber>(Lifetime.Singleton);
 
-        builder.RegisterInstance(new HerbRepository(herbs));
-        builder.RegisterInstance(new PotionRepository(potions));
+        builder.RegisterInstance(new HerbRepository(this.herbs));
+        builder.RegisterInstance(new PotionRepository(this.potions, this.potionFormulas));
         builder.Register<BagContext>(Lifetime.Singleton);
     }
 }

@@ -1,11 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
+using WitchPotion.Bag;
 
 public class CraftPotion : MonoBehaviour
 {
-    // TODO: inject 
-    [SerializeField]
-    private List<PotionFormula> potionFormulas;
+    [Inject]
+    private BagContext bagContext;
+    [Inject]
+    private readonly PotionRepository potionRepository;
+    private List<PotionFormula> potionFormulas => this.potionRepository.AllFormulas;
 
     public Potion Craft(Dictionary<string, int> herbs)
     {
@@ -13,7 +17,10 @@ public class CraftPotion : MonoBehaviour
         {
             if (this.isMatch(potionFormula, herbs))
             {
-                return this.findPotion(potionFormula.potionName);
+                var potion = this.findPotion(potionFormula.potionName);
+                Debug.Assert(potion != null, $"Potion {potionFormula.potionName} not found");
+                this.bagContext.PotionBag.SetCount(potion.name, this.bagContext.PotionBag.GetCount(potion.name) + 1);
+                return potion;
             }
         }
 
@@ -46,11 +53,8 @@ public class CraftPotion : MonoBehaviour
         return true;
     }
 
-    // TODO: impl
     private Potion findPotion(string potionName)
     {
-        var tmp = new Potion();
-        tmp.name = potionName;
-        return tmp;
+        return this.potionRepository.All.Find(potion => potion.potionName == potionName);
     }
 }

@@ -1,15 +1,14 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
+using WitchPotion.Bag;
 
 public class HerbTransformer : MonoBehaviour
 {
-    // TODO: inject repository
-    private Dictionary<string, int> herbRepository = new Dictionary<string, int>()
-    {
-        { "301", 10 },
-        { "401", 10 },
-    };
+    [Inject]
+    private BagContext bagContext;
+
+    private HerbBag herbBag => this.bagContext.HerbBag;
 
     // ratio 9 => 2
     // note: count 表示要轉換幾份，i.e. 傳入 1 會轉出 2 個藥材
@@ -24,15 +23,15 @@ public class HerbTransformer : MonoBehaviour
         }
 
         string consumedCode = (level - 1) + targetCode.Substring(1);
-        int currentCount = herbRepository.GetValueOrDefault(consumedCode);
+        int currentCount = this.herbBag.GetCount(consumedCode);
         int toConsume = count * 9;
         if (currentCount < toConsume)
         {
             throw new ArgumentException("Not enough herb to upcast");
         }
 
-        herbRepository[consumedCode] = currentCount - toConsume;
-        herbRepository[targetCode] = herbRepository.GetValueOrDefault(targetCode) + count * 2;
+        this.herbBag.SetCount(consumedCode, currentCount - toConsume);
+        this.herbBag.SetCount(targetCode, this.herbBag.GetCount(targetCode) + count * 2);
     }
 
     // ratio 5 => 2
@@ -47,14 +46,14 @@ public class HerbTransformer : MonoBehaviour
         }
 
         string consumedCode = (level + 1) + targetCode.Substring(1);
-        int currentCount = herbRepository.GetValueOrDefault(consumedCode);
+        int currentCount = this.herbBag.GetCount(consumedCode);
         int toConsume = count * 5;
         if (currentCount < toConsume)
         {
             throw new ArgumentException("Not enough herb to downcast");
         }
 
-        herbRepository[consumedCode] = currentCount - toConsume;
-        herbRepository[targetCode] = herbRepository.GetValueOrDefault(targetCode) + count * 2;
+        this.herbBag.SetCount(consumedCode, currentCount - toConsume);
+        this.herbBag.SetCount(targetCode, this.herbBag.GetCount(targetCode) + count * 2);
     }
 }

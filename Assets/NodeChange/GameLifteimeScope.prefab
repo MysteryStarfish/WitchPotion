@@ -51,7 +51,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  view: {fileID: 6645477764658105223, guid: 3934d4293ec4d6541a5e4c4533e526a8, type: 3}
   herbs:
   - {fileID: 11400000, guid: c0ed0b974d0825e4b870e79b76af6de3, type: 2}
   - {fileID: 11400000, guid: 9cab2d3ddb0eb3a479be80560f6fb737, type: 2}

@@ -21,7 +21,7 @@ namespace UpdateButtonViewRequest
             _publisher.Publish(new UpdateButtonViewRequest());
         }
     }
-    
+
     public class UpdateButtonViewSubscriber
     {
         private readonly ISubscriber<UpdateButtonViewRequest> _subscriber;

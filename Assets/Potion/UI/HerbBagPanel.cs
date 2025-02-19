@@ -7,28 +7,33 @@ using WitchPotion.Bag;
 
 public class HerbBagPanel : MonoBehaviour
 {
-    [SerializeField]
-    private TMP_Text text;
-
     [Inject]
     private BagContext bagContext;
-
     private HerbBag herbBag => this.bagContext.HerbBag;
 
-    void Start()
+    private ItemCell[] itemCells;
+
+    private void Start()
     {
-        this.herbBag.SetCount("301", 10);
-        this.herbBag.SetCount("401", 10);
+        this.itemCells = GetComponentsInChildren<ItemCell>();
+        foreach (var itemCell in this.itemCells)
+        {
+            itemCell.RemoveItem();
+        }
+        this.herbBag.SetCount("101", 10);
+        this.herbBag.SetCount("102", 10);
     }
 
     void Update()
     {
-        StringBuilder sb = new StringBuilder();
-        sb.AppendLine("Herb Bag");
+        var itemCellsIter = this.itemCells.AsEnumerable().GetEnumerator();
         foreach (var (herb, count) in this.herbBag.GetAll())
         {
-            sb.AppendLine($"- {herb.herbName} ({herb.code}) x{count}");
+            if (!itemCellsIter.MoveNext())
+            {
+                break;
+            }
+            itemCellsIter.Current.SetItem(herb.sprite, count);
         }
-        this.text.text = sb.ToString();
     }
 }

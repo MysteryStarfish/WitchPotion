@@ -12,4 +12,8 @@ public class Herb : ScriptableObject
     public string element;
     [Tooltip("等級")]
     public int level;
+    [Tooltip("描述")]
+    public string description;
+    [Tooltip("圖片，顯示於背包等 UI 中")]
+    public Sprite sprite;
 }

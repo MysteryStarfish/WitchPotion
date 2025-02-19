@@ -52,8 +52,38 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   herbs:
-  - {fileID: 11400000, guid: c0ed0b974d0825e4b870e79b76af6de3, type: 2}
-  - {fileID: 11400000, guid: 9cab2d3ddb0eb3a479be80560f6fb737, type: 2}
+  - {fileID: 11400000, guid: d0978534c099b4b4d9aa250462ef427d, type: 2}
+  - {fileID: 11400000, guid: 3133c42321d055d4ab4f7310d02c0d4d, type: 2}
+  - {fileID: 11400000, guid: fd080039500460940b97ad376dd8bb54, type: 2}
+  - {fileID: 11400000, guid: 499e48a9f2889ac478433919c04576f0, type: 2}
+  - {fileID: 11400000, guid: c98598b87300f96409226f50b03c6cb6, type: 2}
+  - {fileID: 11400000, guid: c74e158633e55bb4481587c31ebb9336, type: 2}
+  - {fileID: 11400000, guid: 5a7c30c2094b62e458a7c0891968b734, type: 2}
+  - {fileID: 11400000, guid: e4b2d8ce53ecb2349bde2ee77f80342a, type: 2}
+  - {fileID: 11400000, guid: 3e4709f8c7b3f844cbbbcbd8e7d7c12a, type: 2}
+  - {fileID: 11400000, guid: bcc62bf7d268d554ab3e298c15475ab5, type: 2}
+  - {fileID: 11400000, guid: c5e6f93e159074244804eb25e3486ac4, type: 2}
+  - {fileID: 11400000, guid: 09a28330b40f0ee4ca8390c4da3ee488, type: 2}
+  - {fileID: 11400000, guid: bb1e46059d3e1ab478da7b559fe60554, type: 2}
+  - {fileID: 11400000, guid: b5e27defda6d56c4c8b0e1315d961e71, type: 2}
+  - {fileID: 11400000, guid: 333725892e14cc4418f1608c286acbf1, type: 2}
+  - {fileID: 11400000, guid: fc5aa095e055b5046b868f5c3bc0680d, type: 2}
+  - {fileID: 11400000, guid: 48e73810ee7008342b74065f467fe5e8, type: 2}
+  - {fileID: 11400000, guid: be9ec66cc085eb44395b7c63b13c329e, type: 2}
+  - {fileID: 11400000, guid: 09d6914ea44731b4ba4c334eb44f305c, type: 2}
+  - {fileID: 11400000, guid: f2c9ac71e8ef16a4495ac15fddab5a4f, type: 2}
+  - {fileID: 11400000, guid: be0701dbd47fff641855b9736479f305, type: 2}
+  - {fileID: 11400000, guid: 1454c936cb2ba5e4baac7e12ced04261, type: 2}
+  - {fileID: 11400000, guid: 936c8e16470b1324393539bc1ea732fb, type: 2}
+  - {fileID: 11400000, guid: 0f59e8edae471b642b2872ea0718f133, type: 2}
+  - {fileID: 11400000, guid: 42c63285f6124634a953c201f4e2418f, type: 2}
+  - {fileID: 11400000, guid: 7abe6eaaa6592d040b30fadd9a9178e1, type: 2}
+  - {fileID: 11400000, guid: 4f91779049e803942a3c567f83d0924a, type: 2}
+  - {fileID: 11400000, guid: bb0aef0589ffe574e97fc18cb871468e, type: 2}
+  - {fileID: 11400000, guid: eb40c94ccb53ca0409c1254afc22ddc6, type: 2}
+  - {fileID: 11400000, guid: d4c3ce5031525b64ea95a8079fb6fa88, type: 2}
+  - {fileID: 11400000, guid: c68f38cc6b326664e8b250e5c5de1430, type: 2}
+  - {fileID: 11400000, guid: 4dcc348b5e14eae448ffcacd96d5b95b, type: 2}
   potions:
   - {fileID: 11400000, guid: 8c95182f7136c52459c6fd68b32f69b0, type: 2}
   potionFormulas:

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92e6ba017138c142969daf4b9020cfa, type: 3}
+  m_Name: 206
+  m_EditorClassIdentifier: 
+  code: 206
+  herbName: "\u858A\u8292\u8349"
+  element: "\u7269\u7406"
+  level: 6
+  description: "\u6D0B\u858A\u8349\u7684\u66F4\u9177\u7248\u672C(?)"
+  sprite: {fileID: 216304546363971902, guid: 84533277c909e9f43b8447b0414aa5ec, type: 3}

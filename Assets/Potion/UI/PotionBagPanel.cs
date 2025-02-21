@@ -1,5 +1,4 @@
-using System.Text;
-using TMPro;
+using System.Linq;
 using UnityEngine;
 using VContainer;
 using WitchPotion.Bag;
@@ -8,25 +7,34 @@ public class PotionBagPanel : MonoBehaviour
 {
     [SerializeField]
     private bool usePlayer;
-    [SerializeField]
-    private string header = "Potion Bag";
-    [SerializeField]
-    private TMP_Text text;
 
     [Inject]
     private BagContext bagContext;
-
     private PotionBag potionBag => this.bagContext.PotionBag;
     private PotionBag playerPotionBag => this.bagContext.PlayerPotionBag;
     private PotionBag targetPotionBag => this.usePlayer ? this.playerPotionBag : this.potionBag;
 
+    private ItemCell[] itemCells;
+
+    private void Start()
+    {
+        this.itemCells = GetComponentsInChildren<ItemCell>();
+        foreach (var itemCell in this.itemCells)
+        {
+            itemCell.RemoveItem();
+        }
+    }
+
     void Update()
     {
-        StringBuilder sb = new StringBuilder(this.header + "\n");
+        var itemCellsIter = this.itemCells.AsEnumerable().GetEnumerator();
         foreach (var (potion, count) in this.targetPotionBag.GetAll())
         {
-            sb.AppendLine($"- {potion.potionName} x{count}");
+            if (!itemCellsIter.MoveNext())
+            {
+                break;
+            }
+            itemCellsIter.Current.SetItem(potion.sprite, count);
         }
-        this.text.text = sb.ToString();
     }
 }

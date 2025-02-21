@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92e6ba017138c142969daf4b9020cfa, type: 3}
+  m_Name: 105
+  m_EditorClassIdentifier: 
+  code: 105
+  herbName: "\u5E7B\u8C61\u8611\u83C7"
+  element: "\u9B54\u6CD5"
+  level: 5
+  description: "\u5916\u89C0\u4E0A\u6709\u8A31\u591A\u985E\u4F3C\u773C\u775B\u7684\u6591\u9EDE\uFF0C\u5BB9\u6613\u8B93\u63A1\u6458\u7684\u4EBA\u8AA4\u6703\u6709\u6578\u5341\u96D9\u773C\u775B\u76EF\u8457\u81EA\u5DF1\uFF0C\u9032\u800C\u8B93\u4EBA\u7522\u751F\u9999\u83C7\u6709\u751F\u547D\u7684\u6DF7\u4E82"
+  sprite: {fileID: 6460090415961922604, guid: 29743e56467a3124e92f1cf740f680b2, type: 3}

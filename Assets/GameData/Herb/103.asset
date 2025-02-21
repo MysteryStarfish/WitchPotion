@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a92e6ba017138c142969daf4b9020cfa, type: 3}
-  m_Name: Wind_01
+  m_Name: 103
   m_EditorClassIdentifier: 
-  code: 401
-  herbName: "\u98A8\u4E4B\u82B1"
-  element: "\u98A8"
-  level: 1
+  code: 103
+  herbName: "\u5BE6\u98DF\u679C"
+  element: "\u9B54\u6CD5"
+  level: 3
+  description: "\u6A61\u5BE6"
+  sprite: {fileID: -6814081207438931458, guid: 168910bdae8fff94380a00c3cafc1fb1, type: 3}

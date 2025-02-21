@@ -26,7 +26,7 @@ public class MapController
     private MapNode[][] _mapNodes;
     private readonly int _collectionChance = 80;
     private readonly int _levelMax = 20;
-    private MapNode[] _lastNode = new MapNode[] {};
+    private MapNode[] _lastNode = new MapNode[] { };
 
 
     public void GenerateMap()
@@ -34,13 +34,13 @@ public class MapController
         GenerateMapInit();
         for (int level = 2; level < _levelMax; level++)
         {
-            char idAlphabet = (char)((int)'A' + level-1);
+            char idAlphabet = (char)((int)'A' + level - 1);
             int idNumber = 0;
-            
+
             var nodesAmount = new int[_mapNodes[level - 1].Length];
             int currentLevelTotalNode = 0;
             currentLevelTotalNode = HandleCurrentLevelNodesAmount(nodesAmount, currentLevelTotalNode);
-            
+
             _mapNodes[level] = new MapNode[currentLevelTotalNode];
             for (int i = 0; i < _mapNodes[level - 1].Length; i++)
             {
@@ -53,7 +53,7 @@ public class MapController
         {
             for (int i = 0; i < _mapNodes[level - 1].Length; i++)
             {
-                var nodes = _mapNodes[level-1][i].NextNode;
+                var nodes = _mapNodes[level - 1][i].NextNode;
                 SetupActions(nodes, level, i);
                 if (_mapNodes[level - 1][i] != null) Debug.Log(_mapNodes[level - 1][i].ID + ": " + _mapNodes[level - 1][i].NextNode.Length);
             }
@@ -61,12 +61,12 @@ public class MapController
     }
     private void GenerateMapInit()
     {
-        _mapNodes = new MapNode[_levelMax+1][];
-        
+        _mapNodes = new MapNode[_levelMax + 1][];
+
         _mapNodes[0] = new MapNode[1];
         _currentNode = CreatNode("house", 0, 0);
         MapNode[] houseNodes = new MapNode[3];
-        
+
         SetupNextNodes(houseNodes);
         SetupNodeActions();
     }
@@ -77,8 +77,8 @@ public class MapController
         for (int nodeIndex = 0; nodeIndex < 3; nodeIndex++)
         {
             NodeActionType actionType = (NodeActionType)nodeIndex;
-            Potion[] condition = new Potion[] {};
-            NodeAction<Potion> action = new NodeAction<Potion>(actionType, condition , 1);
+            Potion[] condition = new Potion[] { };
+            NodeAction<Potion> action = new NodeAction<Potion>(actionType, condition, 1);
             actions[nodeIndex] = action;
         }
         _mapNodes[0][0].SetNodeAction(actions);
@@ -128,7 +128,7 @@ public class MapController
             SetNormalActions(nodeIndex, actions);
             wayActionAmount++;
         }
-        int isWayIndex = Random.Range(nodes.Length, 3-1);
+        int isWayIndex = Random.Range(nodes.Length, 3 - 1);
         for (int nodeIndex = nodes.Length; nodeIndex < 3; nodeIndex++)
         {
             if (nodeIndex < isWayIndex && level >= 3)
@@ -155,7 +155,7 @@ public class MapController
         }
         else if (level >= 8)
         {
-            int potionAction = Random.Range(0, wayActionAmount-1);
+            int potionAction = Random.Range(0, wayActionAmount - 1);
             foreach (var action in actions)
             {
                 if (action.ActionType >= (NodeActionType)3) break;
@@ -178,7 +178,7 @@ public class MapController
             Debug.Log(action.Conditions.Length);
             if (action.Conditions.Length > 0) Debug.Log(action.Conditions[0].potionName);
         }
-        
+
         Shuffle<NodeAction<Potion>>(actions);
         _mapNodes[level - 1][i].SetNodeAction(actions);
     }
@@ -186,7 +186,7 @@ public class MapController
     private static void SetOneWayNeededCondition(int wayActionAmount, NodeAction<Potion>[] actions)
     {
         if (wayActionAmount < 2) return;
-        int potionAction = Random.Range(0, wayActionAmount-1);
+        int potionAction = Random.Range(0, wayActionAmount - 1);
         foreach (var action in actions)
         {
             if (action == actions[potionAction])
@@ -205,8 +205,8 @@ public class MapController
         NodeActionType actionType;
         if (r < _collectionChance) actionType = NodeActionType.COLLECTION;
         else actionType = NodeActionType.RECTIFICATION;
-                
-        Potion[] condition = new Potion[] {};
+
+        Potion[] condition = new Potion[] { };
         NodeAction<Potion> action = new NodeAction<Potion>(actionType, condition, 1);
         actions[nodeIndex] = action;
     }
@@ -216,13 +216,13 @@ public class MapController
         MapNode[] nodes;
         int randomLevel = Random.Range(level - 2, level);
         if (level >= 8) randomLevel = Random.Range(level - 2, level + 2);
-        if (randomLevel >= _levelMax) randomLevel = Random.Range(level - 2, _levelMax-1);
-        int randomIndex = Random.Range(0, _mapNodes[randomLevel].Length-1);
+        if (randomLevel >= _levelMax) randomLevel = Random.Range(level - 2, _levelMax - 1);
+        int randomIndex = Random.Range(0, _mapNodes[randomLevel].Length - 1);
         nodes = _mapNodes[level - 1][i].NextNode.Append(_mapNodes[randomLevel][randomIndex]).ToArray();
         _mapNodes[level - 1][i].SetNextNode(nodes);
-                
+
         NodeActionType actionType = (NodeActionType)(_mapNodes[level - 1][i].NextNode.Length - 1);
-        Potion[] condition = new Potion[] {};
+        Potion[] condition = new Potion[] { };
         NodeAction<Potion> action = new NodeAction<Potion>(actionType, condition, 1);
         actions[nodeIndex] = action;
     }
@@ -230,7 +230,7 @@ public class MapController
     private static void SetNormalActions(int nodeIndex, NodeAction<Potion>[] actions)
     {
         NodeActionType actionType = (NodeActionType)nodeIndex;
-        Potion[] condition = new Potion[] {};
+        Potion[] condition = new Potion[] { };
         NodeAction<Potion> action = new NodeAction<Potion>(actionType, condition, 1);
         actions[nodeIndex] = action;
     }
@@ -240,8 +240,8 @@ public class MapController
         for (int nodeIndex = 0; nodeIndex < nodes.Length; nodeIndex++)
         {
             NodeActionType actionType = NodeActionType.GOAL;
-            Potion[] condition = new Potion[] {};
-            NodeAction<Potion> action = new NodeAction<Potion>(actionType, condition , 1)
+            Potion[] condition = new Potion[] { };
+            NodeAction<Potion> action = new NodeAction<Potion>(actionType, condition, 1)
             {
                 Locked = true
             };
@@ -288,7 +288,7 @@ public class MapController
     void Shuffle<T>(T[] array)
     {
         // Knuth shuffle algorithm :: courtesy of Wikipedia :)
-        for (int t = 0; t < array.Length; t++ )
+        for (int t = 0; t < array.Length; t++)
         {
             T tmp = array[t];
             int r = Random.Range(t, array.Length);
@@ -320,7 +320,7 @@ public class MapController
             Debug.Log(node.ID);
             _lastNode = _lastNode.Append(_currentNode).ToArray();
             _currentNode = node;
-            
+
         }
         else if (nodeAction.ActionType == NodeActionType.NEXTNODE_1)
         {
@@ -345,6 +345,8 @@ public class MapController
         else if (nodeAction.ActionType == NodeActionType.RECTIFICATION)
         {
             Debug.Log("RECTIFICATION");
+            RectificationPanel panel = GameObject.FindFirstObjectByType<RectificationPanel>(FindObjectsInactive.Include);
+            panel.gameObject.SetActive(true);
         }
         _publisher.RequestUpdateButtonView();
     }

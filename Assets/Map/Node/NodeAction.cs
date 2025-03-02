@@ -19,6 +19,8 @@ namespace Map
         private readonly int _useLeftTime;
         private int _currentUseLeftTime;
         public bool Locked = false;
+        public Obstacle LockType;
+        public bool IsHide { get; private set; } = false;
         public NodeAction(NodeActionType actionType, T[] conditions, int useLeftTime)
         {
             ActionType = actionType;
@@ -27,11 +29,12 @@ namespace Map
             _currentUseLeftTime = useLeftTime;
         }
 
-        private void LockAction()
+        public void LockAction()
         {
             Locked = true;
         }
-        private void UnlockAction()
+
+        public void UnlockAction()
         {
             Locked = false;
         }
@@ -52,6 +55,14 @@ namespace Map
         {
             _currentUseLeftTime = _useLeftTime;
             if (Conditions.Length == 0) UnlockAction();
+        }
+        public void HideNode()
+        {
+            IsHide = true;
+        }
+        public void CancelHideNode()
+        {
+            IsHide = false;
         }
     }
 }

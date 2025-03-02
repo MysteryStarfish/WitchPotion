@@ -1,11 +1,19 @@
+using MessagePipe;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace Map
 {
     public class MapViewer : MonoBehaviour
     {
+        [Inject] private ISubscriber<UpdateButtonViewRequest.UpdateButtonViewRequest> _subscriber;
+        [Inject] private MapController _mapController;
+
+        [SerializeField] private TMP_Text history;
+        [SerializeField] private TMP_Text leftStep;
+        
         [SerializeField] private Button choice1;
         [SerializeField] private Button choice2;
         [SerializeField] private Button choice3;
@@ -18,22 +26,33 @@ namespace Map
         private NodeAction<Potion> _action2;
         private NodeAction<Potion> _action3;
         private MapNode[] _nodes;
+
         private void Start()
         {
+            _subscriber.Subscribe(OnUpdateButtonViewRequested);
+            Debug.Log($"Subscribe(OnUpdateButtonViewRequested");
+            UpdateText();
+        }
+        private void OnUpdateButtonViewRequested(UpdateButtonViewRequest.UpdateButtonViewRequest request)
+        {
+            Debug.Log($"UpdateText");
             UpdateText();
         }
         private void GetAction()
         {
-            _action1 = MapController.Instance.CurrentNode.NodeAction[0];
-            _action2 = MapController.Instance.CurrentNode.NodeAction[1];
-            _action3 = MapController.Instance.CurrentNode.NodeAction[2];
-            _nodes = MapController.Instance.CurrentNode.NextNode;
+            _action1 = _mapController.CurrentNode.NodeAction[0];
+            _action2 = _mapController.CurrentNode.NodeAction[1];
+            _action3 = _mapController.CurrentNode.NodeAction[2];
+            _nodes = _mapController.CurrentNode.NextNode;
         }
-        public void UpdateText()
+
+        private void UpdateText()
         {
             GetAction();
             UpdateButtonText();
             UpdateConditionText();
+            UpdateHistory();
+            UpdateLeftStep();
         }
 
         private void UpdateButtonText()
@@ -51,6 +70,7 @@ namespace Map
             if (actionType == NodeActionType.NEXTNODE_0) text.text = nodes[0].ID;
             if (actionType == NodeActionType.NEXTNODE_1) text.text = nodes[1].ID;
             if (actionType == NodeActionType.NEXTNODE_2) text.text = nodes[2].ID;
+            if (action.IsHide)text.text = NodeActionType.COLLECTION.ToString();
             if (action.Locked) button.GetComponent<Image>().color = new Color(155f/255f, 155f/255f, 155f/255f);
             else button.GetComponent<Image>().color = new Color(255f/255f, 255f/255f, 255f/255f);
         }
@@ -64,10 +84,21 @@ namespace Map
         private void HandleConditionText(TMP_Text text, NodeAction<Potion> action)
         {
             text.text = "";
-            foreach (var potion in action.Conditions)
+            if (action.LockType != null)
             {
-                text.text += potion.potionName + "\n";
-            }
+                Debug.Log(action.LockType.Type.ToString());
+                text.text += action.LockType.Type.ToString();
+            }   
+        }
+        private void UpdateHistory()
+        {
+            history.text = _mapController.CurrentNode.ID.ToString();
+            if (_mapController.LastNode.Length != 0) history.text = _mapController.LastNode[^1].ID.ToString() + "->" + _mapController.CurrentNode.ID.ToString();
+        }
+
+        private void UpdateLeftStep()
+        {
+            leftStep.text = "剩下:" + _mapController.CurrentStep.ToString();
         }
     }
 }

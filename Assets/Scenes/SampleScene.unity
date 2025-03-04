@@ -1801,7 +1801,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: {fileID: 11400000, guid: 8c95182f7136c52459c6fd68b32f69b0, type: 2}
   _leftAmount: 3
-  _button: {fileID: 0}
 --- !u!114 &706717858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2277,7 +2276,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: {fileID: 11400000, guid: 8c95182f7136c52459c6fd68b32f69b0, type: 2}
   _leftAmount: 3
-  _button: {fileID: 0}
 --- !u!114 &1112721305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4979,7 +4977,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: {fileID: 11400000, guid: d8783dcce5138194c859ac04c09fa05b, type: 2}
   _leftAmount: 0
-  _button: {fileID: 0}
 --- !u!114 &1914346930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5422,7 +5419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 815027889965818172, guid: 345d337fd16f15a45aa4b8e508cd4ac3, type: 3}
       propertyPath: m_Value
-      value: 0.49999964
+      value: 0.49999994
       objectReference: {fileID: 0}
     - target: {fileID: 1218370498698312469, guid: 345d337fd16f15a45aa4b8e508cd4ac3, type: 3}
       propertyPath: m_AnchorMax.y

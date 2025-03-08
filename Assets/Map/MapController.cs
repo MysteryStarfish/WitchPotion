@@ -99,7 +99,7 @@ public class MapController
         _currentNode = CreatNode("house", 0, 0);
         MapNode[] houseNodes = new MapNode[3];
 
-        SetupNextNodes(houseNodes);
+        SetupInitNodes(houseNodes);
         SetupNodeActions();
     }
 
@@ -116,7 +116,7 @@ public class MapController
         _mapNodes[0][0].SetNodeAction(actions);
     }
 
-    private void SetupNextNodes(MapNode[] houseNodes)
+    private void SetupInitNodes(MapNode[] houseNodes)
     {
         _mapNodes[1] = new MapNode[3];
         houseNodes[0] = CreatNode("A0", 1, 0);
@@ -402,8 +402,8 @@ public class MapController
             Debug.Log("COLLECTION");
             string herbElement = CurrentNode.ElementIndex.ToString();
             string herbType = Random.Range(1, 6).ToString();
-            Herb herb = herbBag.Get(herbElement + "0" + herbType);
-            Debug.Log(herb.herbName);
+            int herbAmount = herbBag.GetCount(herbElement + "0" + herbType);
+            herbBag.SetCount(herbElement + "0" + herbType, herbAmount+1);
         }
         else if (nodeAction.ActionType == NodeActionType.RECTIFICATION)
         {

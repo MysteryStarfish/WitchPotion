@@ -20,7 +20,8 @@ public class TransferPotionPanel : MonoBehaviour
 
     void Start()
     {
-        this.potionBag.SetCount("爆炸藥水", 10);
+        // 一階爆炸藥水
+        this.potionBag.SetCount("1001", 10);
 
         this.transferButton.onClick.AddListener(() =>
         {

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using VContainer;
 using WitchPotion.Bag;
@@ -30,7 +31,10 @@ public class Crucible : MonoBehaviour, OnHerbDroppedHandler
             foreach (var (code, count) in this.herbs)
             {
                 var herb = this.herbRepository.All.Find(herb => herb.code == code);
-                crucibleContent.AddHerb(herb.sprite, count);
+                var herbListItem = crucibleContent.AddHerb(herb.sprite, count);
+                herbListItem.GetComponent<Button>()
+                    .onClick
+                    .AddListener(this.onHerbListItemClicked(herb, herbListItem));
             }
             crucibleContent.OnCraftButtonClicked.AddListener(() =>
             {
@@ -127,5 +131,23 @@ public class Crucible : MonoBehaviour, OnHerbDroppedHandler
     private Potion findPotion(string code)
     {
         return this.potionRepository.All.Find(potion => potion.code == code);
+    }
+
+    private UnityAction onHerbListItemClicked(Herb bindedHerb, GameObject herbListItem)
+    {
+        return () =>
+        {
+            var code = bindedHerb.code;
+            this.herbs[code]--;
+            this.bagContext.HerbBag.SetCount(code, this.bagContext.HerbBag.GetCount(code) + 1);
+
+            if (this.herbs[code] == 0)
+            {
+                this.herbs.Remove(code);
+                Destroy(herbListItem);
+                return;
+            }
+            herbListItem.GetComponentInChildren<TMPro.TMP_Text>().text = $"x{this.herbs[code]}";
+        };
     }
 }

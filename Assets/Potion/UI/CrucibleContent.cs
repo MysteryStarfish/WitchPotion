@@ -18,11 +18,12 @@ public class CrucibleContent : MonoBehaviour
         this.closeButton.onClick.AddListener(() => Destroy(gameObject));
     }
 
-    public void AddHerb(Sprite herbIcon, int count)
+    public GameObject AddHerb(Sprite herbIcon, int count)
     {
         var herbListItem = Instantiate(this.herbListItemPrefab, this.herbListContainer);
         herbListItem.GetComponentInChildren<Image>().sprite = herbIcon;
         herbListItem.GetComponentInChildren<TMPro.TMP_Text>().text = $"x{count}";
+        return herbListItem;
     }
 
     public UnityEvent OnCraftButtonClicked => this.craftButton.onClick;

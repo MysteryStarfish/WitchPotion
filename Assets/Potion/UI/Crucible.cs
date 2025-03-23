@@ -21,6 +21,9 @@ public class Crucible : MonoBehaviour, OnHerbDroppedHandler
 
     private void Start()
     {
+        // 水
+        this.bagContext.HerbBag.SetCount("601", 99);
+
         GetComponent<Button>().onClick.AddListener(() =>
         {
             var crucibleContent = Instantiate(this.crucibleContentPrefab, transform.parent);

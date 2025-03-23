@@ -42,6 +42,7 @@ public class CreateGameData
         herbs.Add(CreateHerb("504", "沼爪花", "水", ""));
         herbs.Add(CreateHerb("505", "三鹽漿", "水", "酢漿草外觀的果實，愛心呈現飽滿狀態並且有氣泡感，類似多肉植物的飽滿葉子"));
         herbs.Add(CreateHerb("506", "渦流草", "水", "圓形的葉片，上面會有漩渦的流向感"));
+        herbs.Add(CreateHerb("601", "水", "魔法", "就是水"));
 
         foreach (Herb herb in herbs)
         {

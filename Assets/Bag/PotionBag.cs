@@ -16,16 +16,16 @@ namespace WitchPotion.Bag
 
         public Potion Get(string itemCode)
         {
-            return potionRepository.All.Find(potion => potion.potionName == itemCode);
+            return potionRepository.All.Find(potion => potion.code == itemCode);
         }
 
         public IEnumerable<(Potion, int)> GetAll()
         {
             foreach (var potion in potionRepository.All)
             {
-                if (potionCounts.ContainsKey(potion.potionName))
+                if (potionCounts.ContainsKey(potion.code))
                 {
-                    yield return (potion, potionCounts[potion.potionName]);
+                    yield return (potion, potionCounts[potion.code]);
                 }
             }
         }
@@ -37,7 +37,7 @@ namespace WitchPotion.Bag
 
         public void SetCount(string itemCode, int count)
         {
-            Debug.Assert(this.potionRepository.All.Exists(potion => potion.potionName == itemCode));
+            Debug.Assert(this.potionRepository.All.Exists(potion => potion.code == itemCode));
             Debug.Assert(count >= 0);
 
             if (count == 0)

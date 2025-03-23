@@ -17,4 +17,4 @@ MonoBehaviour:
   element: "\u6C34"
   level: 5
   description: "\u9162\u6F3F\u8349\u5916\u89C0\u7684\u679C\u5BE6\uFF0C\u611B\u5FC3\u5448\u73FE\u98FD\u6EFF\u72C0\u614B\u4E26\u4E14\u6709\u6C23\u6CE1\u611F\uFF0C\u985E\u4F3C\u591A\u8089\u690D\u7269\u7684\u98FD\u6EFF\u8449\u5B50"
-  sprite: {fileID: 0}
+  sprite: {fileID: 1682008262317320107, guid: 6c558a17f10a21345bfbdce83dbe09af, type: 3}

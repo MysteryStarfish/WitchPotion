@@ -17,4 +17,4 @@ MonoBehaviour:
   element: "\u706B"
   level: 4
   description: "\u6697\u8840\u8272\u7684\u679C\u5BE6\uFF0C\u5728\u967D\u5149\u4E0B\u6676\u7469\u5254\u900F\u50CF\u5BF6\u77F3\u4E00\u6A23"
-  sprite: {fileID: 0}
+  sprite: {fileID: -5535265446822525397, guid: 6d0d39303b0a2a34db93f784900e6414, type: 3}

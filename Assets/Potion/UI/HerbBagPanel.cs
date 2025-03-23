@@ -1,6 +1,5 @@
+using System;
 using System.Linq;
-using System.Text;
-using TMPro;
 using UnityEngine;
 using VContainer;
 using WitchPotion.Bag;
@@ -12,6 +11,8 @@ public class HerbBagPanel : MonoBehaviour
     private HerbBag herbBag => this.bagContext.HerbBag;
 
     private ItemCell[] itemCells;
+
+    public Func<Herb, bool> filter;
 
     private void Start()
     {
@@ -26,14 +27,26 @@ public class HerbBagPanel : MonoBehaviour
 
     void Update()
     {
+        // clear item cells
+        foreach (var itemCell in this.itemCells)
+        {
+            itemCell.RemoveItem();
+        }
+
         var itemCellsIter = this.itemCells.AsEnumerable().GetEnumerator();
         foreach (var (herb, count) in this.herbBag.GetAll())
         {
+            if (this.filter != null && !this.filter(herb))
+            {
+                // Skip if the filter is set and the item does not pass the filter.
+                continue;
+            }
+
             if (!itemCellsIter.MoveNext())
             {
                 break;
             }
-            itemCellsIter.Current.SetItem(herb.sprite, count);
+            itemCellsIter.Current.SetItem(herb.sprite, count, $"Herb:{herb.code}");
         }
     }
 }

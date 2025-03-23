@@ -7,5 +7,5 @@ public class PotionFormula : ScriptableObject
     public List<string> herbCodes;
     public List<int> herbCounts;
 
-    public string potionName;
+    public string potionCode;
 }

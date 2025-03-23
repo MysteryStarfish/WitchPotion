@@ -7,6 +7,7 @@ using WitchPotion.Bag;
 
 public class GameLifetimeScope : LifetimeScope
 {
+    [SerializeField] private Loading loading;
     [SerializeField] private List<Herb> herbs;
     [SerializeField] private List<Potion> potions;
     [SerializeField] private List<PotionFormula> potionFormulas;
@@ -16,8 +17,11 @@ public class GameLifetimeScope : LifetimeScope
         var options = builder.RegisterMessagePipe();
 
         builder.RegisterInstance(new HerbRepository(this.herbs));
+        Debug.Log($"Loaded {this.herbs.Count} herbs");
         builder.RegisterInstance(new PotionRepository(this.potions, this.potionFormulas));
+        Debug.Log($"Loaded {this.potions.Count} potions and {this.potionFormulas.Count} formulas");
         builder.Register<BagContext>(Lifetime.Singleton);
+        builder.RegisterInstance(this.loading);
     }
 }
 

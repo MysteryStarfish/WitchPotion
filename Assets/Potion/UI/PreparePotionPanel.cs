@@ -24,7 +24,8 @@ public class PreparePotionPanel : MonoBehaviour
 
     void Start()
     {
-        this.bagContext.PotionBag.SetCount("爆炸藥水", 10);
+        // 一階爆炸藥水
+        this.bagContext.PotionBag.SetCount("1001", 10);
         foreach (var (potion, count) in this.bagContext.PotionBag.GetAll())
         {
             this.setupPotionListItem(potion, count);

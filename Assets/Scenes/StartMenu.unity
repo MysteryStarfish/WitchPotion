@@ -1053,6 +1053,7 @@ GameObject:
   - component: {fileID: 1335403705}
   - component: {fileID: 1335403704}
   - component: {fileID: 1335403708}
+  - component: {fileID: 1335403709}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1161,6 +1162,23 @@ MonoBehaviour:
   continueButton: {fileID: 1703702723}
   tutorialButton: {fileID: 1488462492}
   tutorial: {fileID: 1253136575}
+--- !u!114 &1335403709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335403703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2c62ac3bcd44fb9e09835581422057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: GameLifetimeScope
+  autoRun: 1
+  autoInjectGameObjects:
+  - {fileID: 1335403703}
 --- !u!1 &1488462490
 GameObject:
   m_ObjectHideFlags: 0

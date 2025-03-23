@@ -47,10 +47,8 @@ MonoBehaviour:
   parentReference:
     TypeName: 
   autoRun: 1
-  autoInjectGameObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  autoInjectGameObjects: []
+  loading: {fileID: 177564895168341687, guid: f0dc3603fca481a4c94bb42d8abeca3a, type: 3}
   herbs:
   - {fileID: 11400000, guid: d0978534c099b4b4d9aa250462ef427d, type: 2}
   - {fileID: 11400000, guid: 3133c42321d055d4ab4f7310d02c0d4d, type: 2}

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using VContainer;
 
 public class StartMenu : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class StartMenu : MonoBehaviour
     [SerializeField]
     private GameObject tutorial;
 
+    [Inject]
+    private readonly Loading loading;
+
     void Start()
     {
         this.startButton.onClick.AddListener(StartGame);
@@ -22,7 +26,7 @@ public class StartMenu : MonoBehaviour
 
     private void StartGame()
     {
-        SceneManager.LoadScene("WitchHouse");
+        this.loading.LoadScene("WitchHouse").Forget();
     }
 
     private void ContinueGame()

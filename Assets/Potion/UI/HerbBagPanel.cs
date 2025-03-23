@@ -33,7 +33,7 @@ public class HerbBagPanel : MonoBehaviour
             {
                 break;
             }
-            itemCellsIter.Current.SetItem(herb.sprite, count);
+            itemCellsIter.Current.SetItem(herb.sprite, count, $"Herb:{herb.code}");
         }
     }
 }

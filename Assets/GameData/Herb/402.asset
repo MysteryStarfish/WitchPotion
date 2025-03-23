@@ -17,4 +17,4 @@ MonoBehaviour:
   element: "\u98A8"
   level: 2
   description: "\u8FF7\u8FED\u9999"
-  sprite: {fileID: 0}
+  sprite: {fileID: -417808653775526200, guid: 0842730ed14904847aef9928c3f5270b, type: 3}

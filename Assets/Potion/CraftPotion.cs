@@ -17,8 +17,8 @@ public class CraftPotion : MonoBehaviour
         {
             if (this.isMatch(potionFormula, herbs))
             {
-                var potion = this.findPotion(potionFormula.potionName);
-                Debug.Assert(potion != null, $"Potion {potionFormula.potionName} not found");
+                var potion = this.findPotion(potionFormula.potionCode);
+                Debug.Assert(potion != null, $"Potion {potionFormula.potionCode} not found");
                 this.bagContext.PotionBag.SetCount(potion.name, this.bagContext.PotionBag.GetCount(potion.name) + 1);
                 return potion;
             }
@@ -53,8 +53,8 @@ public class CraftPotion : MonoBehaviour
         return true;
     }
 
-    private Potion findPotion(string potionName)
+    private Potion findPotion(string code)
     {
-        return this.potionRepository.All.Find(potion => potion.potionName == potionName);
+        return this.potionRepository.All.Find(potion => potion.code == code);
     }
 }

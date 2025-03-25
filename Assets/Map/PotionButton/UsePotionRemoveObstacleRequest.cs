@@ -2,10 +2,12 @@ namespace Map.PotionButton
 {
     public class UsePotionRemoveObstacleRequest
     {
-        public string ID { get; }
-        public UsePotionRemoveObstacleRequest(string id)
+        public string PotionID { get; }
+        public int ButtonIndex { get; }
+        public UsePotionRemoveObstacleRequest(string potionID, int buttonIndex)
         {
-            ID = id;
+            PotionID = potionID;
+            ButtonIndex = buttonIndex;
         }
     }
 }

@@ -11,7 +11,9 @@ public class MapNode
     public int ElementIndex { get; private set; }
     public NodeAction<Potion>[] NodeAction { get; private set; }
     public MapNode[] NextNode { get; private set; }
-    public bool IsHide { get; private set; }
+    public bool IsHide;
+    public bool HideChecked;
+    
     public MapNode(string id, int level, int index)
     {
         this.ID = id;
@@ -20,6 +22,7 @@ public class MapNode
         NextNode = new MapNode[3];
         ElementIndex = Random.Range(0, _elements.Length);
         Element = _elements[ElementIndex];
+        HideChecked = false;
     }
     public void SetNextNode(MapNode[] nextNode)
     {

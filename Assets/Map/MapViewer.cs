@@ -1,14 +1,18 @@
+using Map.PlayStoryEvent;
 using MessagePipe;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using VContainer;
+using WitchPotion.Story;
 
 namespace Map
 {
     public class MapViewer : MonoBehaviour
     {
-        [Inject] private ISubscriber<UpdateButtonViewRequest.UpdateButtonViewRequest> _subscriber;
+        [Inject] private ISubscriber<UpdateButtonViewRequest.UpdateButtonViewRequest> _updateButtonViewRequestSubscriber;
+        [Inject] private ISubscriber<PlayStoryRequest> _playStoryRequestSubscriber;
         [Inject] private MapController _mapController;
 
         [SerializeField] private TMP_Text history;
@@ -26,10 +30,16 @@ namespace Map
         private NodeAction<Potion> _action2;
         private NodeAction<Potion> _action3;
         private MapNode[] _nodes;
+        
+        [SerializeField] private PlayStory storyPrefab;
+        [SerializeField] private PlayStory story;
 
         private void Start()
         {
-            _subscriber.Subscribe(OnUpdateButtonViewRequested);
+            // story = Instantiate(storyPrefab);
+            story.gameObject.SetActive(false);
+            _updateButtonViewRequestSubscriber.Subscribe(OnUpdateButtonViewRequested);
+            _playStoryRequestSubscriber.Subscribe(OnPlayStoryRequested);
             Debug.Log($"Subscribe(OnUpdateButtonViewRequested");
             UpdateText();
         }
@@ -37,6 +47,12 @@ namespace Map
         {
             Debug.Log($"UpdateText");
             UpdateText();
+        }
+
+        private void OnPlayStoryRequested(PlayStoryRequest request)
+        {
+            Debug.Log($"PlayStory");
+            PlayStory(request._isFinished);
         }
         private void GetAction()
         {
@@ -100,5 +116,21 @@ namespace Map
         {
             leftStep.text = "剩下:" + _mapController.CurrentStep.ToString();
         }
+        private void PlayStory(int isFinished)
+        {
+            if (isFinished == 0)
+            {
+                story.gameObject.SetActive(true);
+                _ = story.onHiddenDoorBypassed();
+            }
+            else
+            {
+                // Destroy(story.gameObject);
+                // story = Instantiate(storyPrefab);
+                story.gameObject.SetActive(false);
+            }
+            
+        }
+        
     }
 }

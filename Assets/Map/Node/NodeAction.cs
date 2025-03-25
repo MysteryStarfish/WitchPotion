@@ -27,6 +27,8 @@ namespace Map
             Conditions = conditions;
             _useLeftTime = useLeftTime;
             _currentUseLeftTime = useLeftTime;
+            IsHide = false;
+            Locked = false;
         }
 
         public void LockAction()

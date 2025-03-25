@@ -1,12 +1,15 @@
+using Map.PotionButton;
 using MessagePipe;
 using NodeChange;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using VContainer;
 
-public class NodeChangeButton : MonoBehaviour
+public class NodeChangeButton : MonoBehaviour, IDropHandler
 {
-    [Inject] private IPublisher<NodeChangeRequest> _publisher;
+    [Inject] private IPublisher<NodeChangeRequest> _nodeChangeRequestPublisher;
+    [Inject] private IPublisher<UsePotionRemoveObstacleRequest> _usePotionRemoveObstacleRequestPublisher;
 
     [SerializeField] private Button button;
     [SerializeField] private int chosenIndex;
@@ -16,7 +19,13 @@ public class NodeChangeButton : MonoBehaviour
         button.onClick.AddListener(() =>
         {
             Debug.Log($"Button clicked, requesting scene change to {chosenIndex}");
-            _publisher.Publish(new NodeChangeRequest(chosenIndex));
+            _nodeChangeRequestPublisher.Publish(new NodeChangeRequest(chosenIndex));
         });
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        string code = eventData.pointerDrag.GetComponent<PotionButton>().potion.code;
+        _usePotionRemoveObstacleRequestPublisher.Publish(new UsePotionRemoveObstacleRequest(code, chosenIndex));
     }
 }

@@ -29,11 +29,19 @@ namespace WitchPotion.Story
             this.onHiddenDoorBypassed().Forget();
         }
 
-        private async UniTask onHiddenDoorBypassed()
+        public async UniTask onHiddenDoorBypassed()
         {
             // TODO: update images
 
             await this.showDialogue("門好像怪怪的");
+            await UniTask.WaitUntil(() => Input.GetMouseButtonDown(0));
+            this.resetState();
+        }
+        public async UniTask showWord(string s)
+        {
+            // TODO: update images
+
+            await this.showDialogue(s);
             await UniTask.WaitUntil(() => Input.GetMouseButtonDown(0));
             this.resetState();
         }

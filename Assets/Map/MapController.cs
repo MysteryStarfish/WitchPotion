@@ -293,7 +293,7 @@ public class MapController
     }
     private void AddObstacle(NodeAction<Potion> action)
     {
-        int type = Random.Range(0, 0);
+        int type = Random.Range(0, 9);
         Obstacle obstacle = new Obstacle(type, 0);
         action.LockType = obstacle;
         Debug.Log(obstacle.Type.ToString());
@@ -477,9 +477,11 @@ public class MapController
             Debug.Log("COLLECTION");
             string herbElement = CurrentNode.ElementIndex.ToString();
             string herbType = Random.Range(1, 6).ToString();
-            if (HerbBag.Get(herbElement + "0" + herbType) == null) herbType = "1";
+            Herb herb = HerbBag.Get(herbElement + "0" + herbType);
+            if (herb == null) herbType = "1";
             int herbAmount = HerbBag.GetCount(herbElement + "0" + herbType);
             HerbBag.SetCount(herbElement + "0" + herbType, herbAmount+1);
+            _playStoryRequestPublisher.Publish(new PlayStoryRequest(0, herb.herbName));
         }
         else if (nodeAction.ActionType == NodeActionType.RECTIFICATION)
         {
@@ -498,10 +500,10 @@ public class MapController
     }
     private void ResetActionsTimes(NodeAction<Potion>[] nodeAction)
     {
-        if (Object.FindFirstObjectByType<PlayStory>() != null) _playStoryRequestPublisher.Publish(new PlayStoryRequest(1));
+        if (Object.FindFirstObjectByType<PlayStory>() != null) _playStoryRequestPublisher.Publish(new PlayStoryRequest(1, ""));
         for (int i = 0; i < nodeAction.Length; i++)
         {
-            if (nodeAction[i].IsHide) _playStoryRequestPublisher.Publish(new PlayStoryRequest(0));
+            if (nodeAction[i].IsHide) _playStoryRequestPublisher.Publish(new PlayStoryRequest(0, "門好像怪怪的"));
             nodeAction[i].ResetUsedTimes();
         }
     }

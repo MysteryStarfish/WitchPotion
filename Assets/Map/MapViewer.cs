@@ -1,6 +1,7 @@
 using Map.PlayStoryEvent;
 using MessagePipe;
 using TMPro;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -25,6 +26,18 @@ namespace Map
         [SerializeField] private TMP_Text condition1;
         [SerializeField] private TMP_Text condition2;
         [SerializeField] private TMP_Text condition3;
+        
+        [SerializeField] private Sprite normal;
+        [SerializeField] private Sprite obstacle石頭堆;
+        [SerializeField] private Sprite obstacle刺藤團;
+        [SerializeField] private Sprite obstacle牧草捆;
+        [SerializeField] private Sprite obstacle黏液網;
+        [SerializeField] private Sprite obstacle蛛絲地;
+        [SerializeField] private Sprite obstacle瘴氣區;
+        [SerializeField] private Sprite obstacle凍土台;
+        [SerializeField] private Sprite obstacle蒸氣口;
+        [SerializeField] private Sprite obstacle炎岩區;
+        [SerializeField] private Sprite obstacle迷幻院;
         
         private NodeAction<Potion> _action1;
         private NodeAction<Potion> _action2;
@@ -52,7 +65,7 @@ namespace Map
         private void OnPlayStoryRequested(PlayStoryRequest request)
         {
             Debug.Log($"PlayStory");
-            PlayStory(request._isFinished);
+            PlayStory(request._isFinished, request._showWord);
         }
         private void GetAction()
         {
@@ -83,12 +96,41 @@ namespace Map
             TMP_Text text = button.GetComponentInChildren<TMP_Text>();
             text.text = action.ActionType.ToString();
             NodeActionType actionType = action.ActionType;
+            button.GetComponent<Image>().color = Color.white;
             if (actionType == NodeActionType.NEXTNODE_0) text.text = nodes[0].ID;
             if (actionType == NodeActionType.NEXTNODE_1) text.text = nodes[1].ID;
             if (actionType == NodeActionType.NEXTNODE_2) text.text = nodes[2].ID;
-            if (action.IsHide)text.text = NodeActionType.COLLECTION.ToString();
-            if (action.Locked) button.GetComponent<Image>().color = new Color(155f/255f, 155f/255f, 155f/255f);
-            else button.GetComponent<Image>().color = new Color(255f/255f, 255f/255f, 255f/255f);
+            if (action.IsHide) button.GetComponent<Image>().sprite = obstacle迷幻院;
+            if (action.Locked)
+            {
+                if (action.LockType.Type == Obstacle.ObstacleType.石頭堆)
+                {
+                    button.GetComponent<Image>().sprite = obstacle石頭堆;
+                } else if (action.LockType.Type == Obstacle.ObstacleType.牧草捆)
+                {
+                    button.GetComponent<Image>().sprite = obstacle牧草捆;
+                } else if (action.LockType.Type == Obstacle.ObstacleType.黏液網)
+                {
+                    button.GetComponent<Image>().sprite = obstacle黏液網;
+                } else if (action.LockType.Type == Obstacle.ObstacleType.蛛絲地)
+                {
+                    button.GetComponent<Image>().sprite = obstacle蛛絲地;
+                } else if (action.LockType.Type == Obstacle.ObstacleType.瘴氣區)
+                {
+                    button.GetComponent<Image>().sprite = obstacle瘴氣區;
+                } else if (action.LockType.Type == Obstacle.ObstacleType.凍土台)
+                {
+                    button.GetComponent<Image>().sprite = obstacle凍土台;
+                } else if (action.LockType.Type == Obstacle.ObstacleType.蒸氣口)
+                {
+                    button.GetComponent<Image>().sprite = obstacle蒸氣口;
+                } else if (action.LockType.Type == Obstacle.ObstacleType.炎岩區)
+                {
+                    button.GetComponent<Image>().sprite = obstacle炎岩區;
+                } 
+                
+            }
+            else button.GetComponent<Image>().sprite = normal;
         }
 
         private void UpdateConditionText()
@@ -116,12 +158,12 @@ namespace Map
         {
             leftStep.text = "剩下:" + _mapController.CurrentStep.ToString();
         }
-        private void PlayStory(int isFinished)
+        private void PlayStory(int isFinished, string s)
         {
             if (isFinished == 0)
             {
                 story.gameObject.SetActive(true);
-                _ = story.onHiddenDoorBypassed();
+                _ = story.showWord(s);
             }
             else
             {

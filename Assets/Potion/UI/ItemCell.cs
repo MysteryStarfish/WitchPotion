@@ -2,14 +2,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using VContainer;
+using WitchPotion.Bag;
 
-public class ItemCell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class ItemCell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerExitHandler, IPointerMoveHandler, IPointerEnterHandler
 {
     private string key;
     private Image image;
     private TMP_Text text;
 
+    private BagDisplayItem bagDisplayItem;
     private GameObject draggingObject;
+    [Inject]
+    private ItemDescriptionFloatingPanel itemDescriptionPanel;
 
     private void Awake()
     {
@@ -26,12 +31,22 @@ public class ItemCell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         this.key = key;
     }
 
+    public void SetItem(BagDisplayItem item, int count, string key)
+    {
+        this.image.color = Color.white;
+        this.image.sprite = item.Sprite;
+        this.text.text = count.ToString();
+        this.key = key;
+        this.bagDisplayItem = item;
+    }
+
     public void RemoveItem()
     {
         this.image.color = Color.gray;
         this.image.sprite = null;
         this.text.text = string.Empty;
         this.key = "";
+        this.bagDisplayItem = null;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -76,5 +91,39 @@ public class ItemCell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
             }
         }
         Destroy(this.draggingObject);
+    }
+
+    public void OnPointerMove(PointerEventData eventData)
+    {
+        if (this.bagDisplayItem == null)
+        {
+            return;
+        }
+
+        this.itemDescriptionPanel.gameObject.SetActive(true);
+        this.itemDescriptionPanel.transform.position = eventData.position;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (this.bagDisplayItem == null)
+        {
+            Debug.LogWarning("OnPointerExit: No bag display item set.");
+            return;
+        }
+        this.itemDescriptionPanel.gameObject.SetActive(false);
+        Debug.Log($"OnPointerExit: {eventData.position}");
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (this.bagDisplayItem == null)
+        {
+            Debug.LogWarning("OnPointerEnter: No bag display item set.");
+            return;
+        }
+
+        this.itemDescriptionPanel.gameObject.SetActive(true);
+        this.itemDescriptionPanel.SetItem(this.bagDisplayItem);
     }
 }

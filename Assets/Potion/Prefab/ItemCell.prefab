@@ -261,3 +261,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5113f7fa647c8d943b5c41792207fca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDescriptionPanelPrefab: {fileID: 763984075792788554, guid: 3ef4f27f233f7a740a0db89d5ce8f2ab, type: 3}

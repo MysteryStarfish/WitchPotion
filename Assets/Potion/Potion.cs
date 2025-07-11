@@ -12,4 +12,6 @@ public class Potion : ScriptableObject, BagDisplayItem
     public Sprite sprite;
 
     public Sprite Sprite => sprite;
+    public string Name => potionName;
+    public string Description => description;
 }

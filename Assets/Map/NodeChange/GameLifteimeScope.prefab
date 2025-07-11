@@ -192,3 +192,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 834d44af5840fb344acdb7c8faaa6b6f, type: 2}
   - {fileID: 11400000, guid: aac2f7cf9203e5844b65f99384845f6d, type: 2}
   - {fileID: 11400000, guid: d8fc0089b43857e45b4d83fc42543509, type: 2}
+  itemDescriptionPanelPrefab: {fileID: 763984075792788554, guid: 3ef4f27f233f7a740a0db89d5ce8f2ab, type: 3}

@@ -2,14 +2,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using VContainer;
 
-public class ItemCell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class ItemCell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerExitHandler, IPointerMoveHandler
 {
     private string key;
     private Image image;
     private TMP_Text text;
 
     private GameObject draggingObject;
+    [Inject]
+    private ItemDescriptionFloatingPanel itemDescriptionPanel;
 
     private void Awake()
     {
@@ -76,5 +79,17 @@ public class ItemCell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
             }
         }
         Destroy(this.draggingObject);
+    }
+
+    public void OnPointerMove(PointerEventData eventData)
+    {
+        this.itemDescriptionPanel.gameObject.SetActive(true);
+        this.itemDescriptionPanel.transform.position = eventData.position;
+        Debug.Log($"OnPointerMove: {eventData.position}");
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log($"OnPointerExit: {eventData.position}");
     }
 }

@@ -11,6 +11,7 @@ public class GameLifetimeScope : LifetimeScope
     [SerializeField] private List<Herb> herbs;
     [SerializeField] private List<Potion> potions;
     [SerializeField] private List<PotionFormula> potionFormulas;
+    [SerializeField] private ItemDescriptionFloatingPanel itemDescriptionPanelPrefab;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -22,6 +23,7 @@ public class GameLifetimeScope : LifetimeScope
         Debug.Log($"Loaded {this.potions.Count} potions and {this.potionFormulas.Count} formulas");
         builder.Register<BagContext>(Lifetime.Singleton);
         builder.RegisterInstance(this.loading);
+        builder.RegisterInstance(Instantiate(this.itemDescriptionPanelPrefab));
     }
 }
 

@@ -19,4 +19,6 @@ public class Herb : ScriptableObject, BagDisplayItem
     public Sprite sprite;
 
     public Sprite Sprite => sprite;
+    public string Name => herbName;
+    public string Description => description;
 }

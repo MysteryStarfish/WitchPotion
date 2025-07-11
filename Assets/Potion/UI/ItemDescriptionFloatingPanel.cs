@@ -1,7 +1,14 @@
+using TMPro;
 using UnityEngine;
+using WitchPotion.Bag;
 
 public class ItemDescriptionFloatingPanel : MonoBehaviour
 {
+    [SerializeField]
+    private TMP_Text nameText;
+    [SerializeField]
+    private TMP_Text descriptionText;
+
     void OnEnable()
     {
         var canvas = FindAnyObjectByType<Canvas>();
@@ -13,15 +20,19 @@ public class ItemDescriptionFloatingPanel : MonoBehaviour
         transform.SetParent(canvas.transform, true);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void SetName(string itemName)
     {
-
+        nameText.text = itemName;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetDescription(string description)
     {
+        descriptionText.text = description;
+    }
 
+    public void SetItem(BagDisplayItem item)
+    {
+        SetName(item.Name);
+        SetDescription(item.Description);
     }
 }

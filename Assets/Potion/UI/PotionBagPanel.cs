@@ -34,7 +34,7 @@ public class PotionBagPanel : MonoBehaviour
             {
                 break;
             }
-            itemCellsIter.Current.SetItem(potion.sprite, count, $"Potion:{potion.code}");
+            itemCellsIter.Current.SetItem(potion, count, $"Potion:{potion.code}");
         }
     }
 }
